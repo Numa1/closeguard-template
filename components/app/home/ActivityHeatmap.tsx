@@ -1,3 +1,5 @@
+"use client";
+
 import { Card } from "@heroui/react";
 
 const WEEKS = 18;

@@ -75,7 +75,7 @@ body {
 }
 
 [data-theme="2"] body {
-  font-family: var(--font-tt-otilito), system-ui, sans-serif;
+  font-family: var(--font-gustavo), system-ui, sans-serif;
 }
 
 /* Cards / composants blancs → suivent le thème */

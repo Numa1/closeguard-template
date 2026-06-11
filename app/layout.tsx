@@ -15,15 +15,14 @@ const ttFirsNeue = localFont({
   display: "swap",
 });
 
-const ttOtilito = localFont({
+const gustavo = localFont({
   src: [
-    { path: "./fonts/otilito/TTOtilito-Light.ttf", weight: "300", style: "normal" },
-    { path: "./fonts/otilito/TTOtilito-Regular.ttf", weight: "400", style: "normal" },
-    { path: "./fonts/otilito/TTOtilito-Medium.ttf", weight: "500", style: "normal" },
-    { path: "./fonts/otilito/TTOtilito-SemiBold.ttf", weight: "600", style: "normal" },
-    { path: "./fonts/otilito/TTOtilito-Bold.ttf", weight: "700", style: "normal" },
+    { path: "./fonts/gustavo/Gustavo-Regular.otf", weight: "400", style: "normal" },
+    { path: "./fonts/gustavo/Gustavo-Italic.otf", weight: "400", style: "italic" },
+    { path: "./fonts/gustavo/Gustavo-Bold.otf", weight: "700", style: "normal" },
+    { path: "./fonts/gustavo/Gustavo-BoldItalic.otf", weight: "700", style: "italic" },
   ],
-  variable: "--font-tt-otilito",
+  variable: "--font-gustavo",
   display: "swap",
 });
 
@@ -41,7 +40,7 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`${ttFirsNeue.variable} ${ttOtilito.variable} h-full antialiased`}
+      className={`${ttFirsNeue.variable} ${gustavo.variable} h-full antialiased`}
     >
       <body className="min-h-full">
         <ThemeProvider />

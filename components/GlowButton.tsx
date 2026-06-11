@@ -1,7 +1,8 @@
 "use client";
 
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode } from "react";
 import BorderGlow from "@/components/effects/BorderGlow";
+import { useCurrentTheme } from "@/hooks/useCurrentTheme";
 
 interface GlowButtonProps {
   children: ReactNode;
@@ -19,20 +20,7 @@ export default function GlowButton({
   onClick,
   className = "",
 }: GlowButtonProps) {
-  const [theme, setTheme] = useState("1");
-
-  useEffect(() => {
-    const read = () =>
-      setTheme(document.documentElement.dataset.theme ?? "1");
-    read();
-    const obs = new MutationObserver(read);
-    obs.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["data-theme"],
-    });
-    return () => obs.disconnect();
-  }, []);
-
+  const theme = useCurrentTheme();
   const t = THEME_COLORS[theme] ?? THEME_COLORS["1"];
 
   return (

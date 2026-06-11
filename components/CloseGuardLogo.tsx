@@ -1,5 +1,8 @@
+import { CSSProperties } from "react";
+
 interface CloseGuardLogoProps {
   className?: string;
+  style?: CSSProperties;
 }
 
 const logoStyles = `
@@ -26,11 +29,12 @@ const logoStyles = `
 }
 `;
 
-export default function CloseGuardLogo({ className }: CloseGuardLogoProps) {
+export default function CloseGuardLogo({ className, style }: CloseGuardLogoProps) {
   return (
     <svg
       viewBox="-8 -8 228 144"
       className={className}
+      style={style}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       overflow="visible"

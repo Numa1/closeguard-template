@@ -1,0 +1,32 @@
+@import "tailwindcss";
+@import "@heroui/styles";
+@import "@heroui-pro/react/css";
+
+@theme inline {
+  --color-accent: #72fa91;
+  --color-background: #f6f6f6;
+  --font-sans: var(--font-tt-firs-neue);
+}
+
+/* Aligne l'accent HeroUI (Pro + OSS) sur le vert CTA.
+   Dans @layer base (comme HeroUI) et déclaré après l'import → gagne la cascade. */
+@layer base {
+  :root,
+  .light,
+  .default,
+  [data-theme="light"],
+  [data-theme="default"] {
+    --accent: #72fa91;
+    --accent-hover: #5fe07d;
+    --accent-foreground: #04210f;
+    --accent-soft: color-mix(in srgb, #72fa91 22%, transparent);
+    --accent-soft-foreground: #0b5c2e;
+    --accent-soft-hover: color-mix(in srgb, #72fa91 30%, transparent);
+  }
+}
+
+body {
+  background: #f6f6f6;
+  color: #000102;
+  font-family: var(--font-tt-firs-neue), system-ui, sans-serif;
+}

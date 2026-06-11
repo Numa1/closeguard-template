@@ -47,24 +47,24 @@
   --cg-bg: #f2f1f6;
   --cg-bg-card: #ececf0;
   --cg-text-1: #010101;
-  --cg-text-2: #7301ff;
-  --cg-cta: #93fa00;
-  --cg-cta-fg: #010101;
-  --cg-cta-soft-bg: rgba(147, 250, 0, 0.18);
-  --cg-cta-soft-fg: #3a6200;
-  /* heatmap — ramp lime */
+  --cg-text-2: #6b7280;
+  --cg-cta: #7301ff;
+  --cg-cta-fg: #ffffff;
+  --cg-cta-soft-bg: rgba(115, 1, 255, 0.12);
+  --cg-cta-soft-fg: #5200b8;
+  /* heatmap — ramp violet */
   --cg-heat-0: #edeaf5;
-  --cg-heat-1: #d4f0a0;
-  --cg-heat-2: #b2e44a;
-  --cg-heat-3: #93fa00;
-  --cg-heat-4: #5a9900;
+  --cg-heat-1: #c4a8f5;
+  --cg-heat-2: #9a5eff;
+  --cg-heat-3: #7301ff;
+  --cg-heat-4: #4a00b8;
   /* HeroUI accent override (unlayered > @layer base) */
-  --accent: #93fa00;
-  --accent-hover: #7dde00;
-  --accent-foreground: #010101;
-  --accent-soft: rgba(147, 250, 0, 0.18);
-  --accent-soft-foreground: #3a6200;
-  --accent-soft-hover: rgba(147, 250, 0, 0.28);
+  --accent: #7301ff;
+  --accent-hover: #5800cc;
+  --accent-foreground: #ffffff;
+  --accent-soft: rgba(115, 1, 255, 0.12);
+  --accent-soft-foreground: #5200b8;
+  --accent-soft-hover: rgba(115, 1, 255, 0.2);
 }
 
 /* ─── Base styles ───────────────────────────────── */

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import "./globals.css";
 
 const ttFirsNeue = localFont({
@@ -11,6 +12,18 @@ const ttFirsNeue = localFont({
     { path: "./fonts/TTFirsNeue-Bold.ttf", weight: "700", style: "normal" },
   ],
   variable: "--font-tt-firs-neue",
+  display: "swap",
+});
+
+const ttOtilito = localFont({
+  src: [
+    { path: "./fonts/otilito/TTOtilito-Light.ttf", weight: "300", style: "normal" },
+    { path: "./fonts/otilito/TTOtilito-Regular.ttf", weight: "400", style: "normal" },
+    { path: "./fonts/otilito/TTOtilito-Medium.ttf", weight: "500", style: "normal" },
+    { path: "./fonts/otilito/TTOtilito-SemiBold.ttf", weight: "600", style: "normal" },
+    { path: "./fonts/otilito/TTOtilito-Bold.ttf", weight: "700", style: "normal" },
+  ],
+  variable: "--font-tt-otilito",
   display: "swap",
 });
 
@@ -26,8 +39,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className={`${ttFirsNeue.variable} h-full antialiased`}>
-      <body className="min-h-full bg-[#f6f6f6] text-[#000102]">{children}</body>
+    <html
+      lang="fr"
+      className={`${ttFirsNeue.variable} ${ttOtilito.variable} h-full antialiased`}
+    >
+      <body className="min-h-full">
+        <ThemeProvider />
+        {children}
+      </body>
     </html>
   );
 }

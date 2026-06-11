@@ -8,8 +8,7 @@
   --font-sans: var(--font-tt-firs-neue);
 }
 
-/* Aligne l'accent HeroUI (Pro + OSS) sur le vert CTA.
-   Dans @layer base (comme HeroUI) et déclaré après l'import → gagne la cascade. */
+/* Default accent — in @layer base, declared after HeroUI → gagne la cascade */
 @layer base {
   :root,
   .light,
@@ -25,8 +24,66 @@
   }
 }
 
+/* ─── Tokens communs à tous les thèmes ─────────── */
+:root {
+  --cg-bg: #f6f6f6;
+  --cg-bg-card: #ffffff;
+  --cg-text-1: #000102;
+  --cg-text-2: #6b7280;
+  --cg-cta: #72fa91;
+  --cg-cta-fg: #04210f;
+  --cg-cta-soft-bg: rgba(114, 250, 145, 0.2);
+  --cg-cta-soft-fg: #0b5c2e;
+  /* heatmap */
+  --cg-heat-0: #edf0f2;
+  --cg-heat-1: #c7f7d5;
+  --cg-heat-2: #86efac;
+  --cg-heat-3: #34d399;
+  --cg-heat-4: #15803d;
+}
+
+/* ─── Thème 2 : Violet / Lime ───────────────────── */
+[data-theme="2"] {
+  --cg-bg: #f2f1f6;
+  --cg-bg-card: #ececf0;
+  --cg-text-1: #010101;
+  --cg-text-2: #7301ff;
+  --cg-cta: #93fa00;
+  --cg-cta-fg: #010101;
+  --cg-cta-soft-bg: rgba(147, 250, 0, 0.18);
+  --cg-cta-soft-fg: #3a6200;
+  /* heatmap — ramp lime */
+  --cg-heat-0: #edeaf5;
+  --cg-heat-1: #d4f0a0;
+  --cg-heat-2: #b2e44a;
+  --cg-heat-3: #93fa00;
+  --cg-heat-4: #5a9900;
+  /* HeroUI accent override (unlayered > @layer base) */
+  --accent: #93fa00;
+  --accent-hover: #7dde00;
+  --accent-foreground: #010101;
+  --accent-soft: rgba(147, 250, 0, 0.18);
+  --accent-soft-foreground: #3a6200;
+  --accent-soft-hover: rgba(147, 250, 0, 0.28);
+}
+
+/* ─── Base styles ───────────────────────────────── */
 body {
-  background: #f6f6f6;
-  color: #000102;
+  background: var(--cg-bg);
+  color: var(--cg-text-1);
   font-family: var(--font-tt-firs-neue), system-ui, sans-serif;
 }
+
+[data-theme="2"] body {
+  font-family: var(--font-tt-otilito), system-ui, sans-serif;
+}
+
+/* Cards / composants blancs → suivent le thème */
+[data-theme="2"] .bg-white {
+  background-color: var(--cg-bg-card);
+}
+
+/* ─── Bascule de logo par thème ─────────────────── */
+.cg-logo-2 { display: none; }
+[data-theme="2"] .cg-logo-1 { display: none; }
+[data-theme="2"] .cg-logo-2 { display: flex; align-items: center; }

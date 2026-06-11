@@ -31,6 +31,7 @@ import { AppLayout, Navbar, Sidebar } from "@heroui-pro/react";
 import AnimatedWaveIcon from "@/components/AnimatedWaveIcon";
 import CloseGuardLogo from "@/components/CloseGuardLogo";
 import GlowButton from "@/components/GlowButton";
+import Logo2 from "@/components/Logo2";
 
 interface NavItem {
   href: string;
@@ -132,7 +133,12 @@ function AppSidebar({ currentHref }: { currentHref: string }) {
     <>
       <Sidebar.Header className="gap-3">
         <div className="flex items-center gap-2 px-1 pt-1">
-          <CloseGuardLogo className="h-7 w-auto shrink-0 text-[#000102]" />
+          <span className="cg-logo-1 flex items-center">
+            <CloseGuardLogo className="h-7 w-auto shrink-0 text-[#000102]" />
+          </span>
+          <span className="cg-logo-2">
+            <Logo2 className="h-8 w-auto shrink-0 text-[#7301ff]" />
+          </span>
           <span className="text-lg font-medium text-foreground">Closeguard</span>
         </div>
         <GlowButton className="w-full" onClick={() => {}}>
@@ -164,11 +170,15 @@ function AppSidebar({ currentHref }: { currentHref: string }) {
                     {item.tag && (
                       <Sidebar.MenuChip>
                         <span
-                          className={`rounded-full px-2 py-0.5 text-[11px] font-medium ${
+                          className="rounded-full px-2 py-0.5 text-[11px] font-medium"
+                          style={
                             item.soon
-                              ? "bg-gray-100 text-[#9ca3af]"
-                              : "bg-[#72fa91]/20 text-[#0b5c2e]"
-                          }`}
+                              ? { backgroundColor: "#f3f4f6", color: "#9ca3af" }
+                              : {
+                                  backgroundColor: "var(--cg-cta-soft-bg)",
+                                  color: "var(--cg-cta-soft-fg)",
+                                }
+                          }
                         >
                           {item.tag.label}
                         </span>
@@ -176,7 +186,13 @@ function AppSidebar({ currentHref }: { currentHref: string }) {
                     )}
                     {item.count != null && (
                       <Sidebar.MenuChip>
-                        <span className="inline-flex min-w-[18px] items-center justify-center rounded-full bg-[#72fa91] px-1.5 py-0.5 text-[11px] font-semibold tabular-nums text-[#04210f]">
+                        <span
+                          className="inline-flex min-w-[18px] items-center justify-center rounded-full px-1.5 py-0.5 text-[11px] font-semibold tabular-nums"
+                          style={{
+                            backgroundColor: "var(--cg-cta)",
+                            color: "var(--cg-cta-fg)",
+                          }}
+                        >
                           {item.count}
                         </span>
                       </Sidebar.MenuChip>
@@ -250,7 +266,10 @@ function AppNavbar({
           <Navbar.Item aria-label="Notifications">
             <span className="relative inline-flex">
               <Bell className="size-4" />
-              <span className="absolute -right-1.5 -top-1.5 flex size-3.5 items-center justify-center rounded-full bg-[#72fa91] text-[9px] font-bold text-[#04210f]">
+              <span
+                className="absolute -right-1.5 -top-1.5 flex size-3.5 items-center justify-center rounded-full text-[9px] font-bold"
+                style={{ backgroundColor: "var(--cg-cta)", color: "var(--cg-cta-fg)" }}
+              >
                 3
               </span>
             </span>
@@ -271,7 +290,13 @@ function AppNavbar({
                 <Dropdown.Item id="pricing" textValue="Abonnement">
                   <CreditCard className="size-4 text-muted" />
                   <Label>Abonnement</Label>
-                  <span className="ml-auto rounded-full bg-[#72fa91]/20 px-2 py-0.5 text-[11px] font-medium text-[#0b5c2e]">
+                  <span
+                    className="ml-auto rounded-full px-2 py-0.5 text-[11px] font-medium"
+                    style={{
+                      backgroundColor: "var(--cg-cta-soft-bg)",
+                      color: "var(--cg-cta-soft-fg)",
+                    }}
+                  >
                     Pro
                   </span>
                 </Dropdown.Item>

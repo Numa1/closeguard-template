@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import BorderGlow from "@/components/effects/BorderGlow";
 
 interface GlowButtonProps {
@@ -9,11 +9,32 @@ interface GlowButtonProps {
   className?: string;
 }
 
+const THEME_COLORS: Record<string, { bg: string; colors: [string, string, string]; fg: string }> = {
+  "1": { bg: "#72fa91", colors: ["#ffffff", "#bbf7d0", "#34d399"], fg: "#04210f" },
+  "2": { bg: "#93fa00", colors: ["#ffffff", "#d4f0a0", "#5a9900"], fg: "#010101" },
+};
+
 export default function GlowButton({
   children,
   onClick,
   className = "",
 }: GlowButtonProps) {
+  const [theme, setTheme] = useState("1");
+
+  useEffect(() => {
+    const read = () =>
+      setTheme(document.documentElement.dataset.theme ?? "1");
+    read();
+    const obs = new MutationObserver(read);
+    obs.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+    return () => obs.disconnect();
+  }, []);
+
+  const t = THEME_COLORS[theme] ?? THEME_COLORS["1"];
+
   return (
     <button
       type="button"
@@ -23,14 +44,17 @@ export default function GlowButton({
       <BorderGlow
         className="glow-button"
         glowColor="140 90 68"
-        backgroundColor="#72fa91"
+        backgroundColor={t.bg}
         borderRadius={9999}
         glowRadius={18}
         glowIntensity={1.3}
         coneSpread={25}
-        colors={["#ffffff", "#bbf7d0", "#34d399"]}
+        colors={t.colors}
       >
-        <span className="flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-medium text-[#04210f]">
+        <span
+          className="flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-medium"
+          style={{ color: t.fg }}
+        >
           {children}
         </span>
       </BorderGlow>

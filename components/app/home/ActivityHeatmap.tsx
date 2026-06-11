@@ -5,8 +5,7 @@ import { Card } from "@heroui/react";
 const WEEKS = 18;
 const DAYS = 7;
 
-// green intensity ramp (level 0 = empty)
-const COLORS = ["#edf0f2", "#c7f7d5", "#86efac", "#34d399", "#15803d"];
+// Les couleurs de niveaux sont définies comme CSS vars dans globals.css par thème
 
 const DAY_LABELS = ["Lun", "", "Mer", "", "Ven", "", ""];
 
@@ -94,7 +93,7 @@ export default function ActivityHeatmap() {
                       <div
                         key={d}
                         className="size-2.5 rounded-[3px]"
-                        style={{ backgroundColor: COLORS[cell.level] }}
+                        style={{ backgroundColor: `var(--cg-heat-${cell.level})` }}
                         title={
                           cell.count === 0
                             ? "Aucun appel"
@@ -112,11 +111,11 @@ export default function ActivityHeatmap() {
         {/* legend */}
         <div className="mt-3 flex items-center justify-end gap-1.5 text-[10px] text-[#9ca3af]">
           <span>Moins</span>
-          {COLORS.map((c) => (
+          {[0, 1, 2, 3, 4].map((level) => (
             <span
-              key={c}
+              key={level}
               className="size-2.5 rounded-[3px]"
-              style={{ backgroundColor: c }}
+              style={{ backgroundColor: `var(--cg-heat-${level})` }}
             />
           ))}
           <span>Plus</span>

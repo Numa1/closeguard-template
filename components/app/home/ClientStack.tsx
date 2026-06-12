@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Card } from "@heroui/react";
 import Stack from "@/components/effects/Stack";
 import PixelCard from "@/components/effects/PixelCard";
@@ -67,6 +67,13 @@ export default function ClientStack() {
   const theme = useCurrentTheme();
   const [swaps, setSwaps] = useState(0);
 
+  // Référence stable : sinon chaque re-render (setSwaps) recrée le tableau,
+  // ce qui réinitialise la pile du Stack et bloque le swipe/autoplay.
+  const cards = useMemo(
+    () => clients.map((c, i) => <ClientTile key={i} client={c} />),
+    []
+  );
+
   return (
     <Card className="relative overflow-hidden rounded-2xl bg-white shadow-sm">
       {/* Pixels en arrière-plan de toute la carte (burst au swap) */}
@@ -103,9 +110,7 @@ export default function ClientStack() {
             autoplayDelay={2400}
             pauseOnHover
             onSwap={() => setSwaps((n) => n + 1)}
-            cards={clients.map((c, i) => (
-              <ClientTile key={i} client={c} />
-            ))}
+            cards={cards}
           />
         </div>
       </Card.Content>

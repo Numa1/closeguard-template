@@ -67,8 +67,21 @@ export default function ClientStack() {
   const [swaps, setSwaps] = useState(0);
 
   return (
-    <Card className="rounded-2xl bg-white shadow-sm">
-      <Card.Content className="flex flex-col items-center gap-10 p-6 sm:flex-row sm:items-start sm:justify-center">
+    <Card className="relative overflow-hidden rounded-2xl bg-white shadow-sm">
+      {/* Pixels en arrière-plan de toute la carte (burst au swap) */}
+      <div className="pointer-events-none absolute inset-0 z-0">
+        <PixelCard
+          noHover
+          noFocus
+          trigger={swaps}
+          autoHideDelay={650}
+          gap={6}
+          speed={45}
+          colors={PIXEL_COLORS[theme] ?? PIXEL_COLORS["1"]}
+        />
+      </div>
+
+      <Card.Content className="relative z-10 flex flex-col items-center gap-10 p-6 sm:flex-row sm:items-start sm:justify-center">
         <div className="min-w-0 sm:pt-1">
           <p className="text-[11px] font-medium uppercase tracking-wider text-[#9ca3af]">
             Derniers clients
@@ -82,28 +95,17 @@ export default function ClientStack() {
         </div>
 
         <div className="shrink-0" style={{ width: 240, height: 240 }}>
-          <PixelCard
-            overlay
-            noHover
-            noFocus
-            trigger={swaps}
-            autoHideDelay={650}
-            gap={6}
-            speed={45}
-            colors={PIXEL_COLORS[theme] ?? PIXEL_COLORS["1"]}
-          >
-            <Stack
-              sensitivity={120}
-              sendToBackOnClick
-              autoplay
-              autoplayDelay={2400}
-              pauseOnHover
-              onSwap={() => setSwaps((n) => n + 1)}
-              cards={clients.map((c, i) => (
-                <ClientTile key={i} client={c} />
-              ))}
-            />
-          </PixelCard>
+          <Stack
+            sensitivity={120}
+            sendToBackOnClick
+            autoplay
+            autoplayDelay={2400}
+            pauseOnHover
+            onSwap={() => setSwaps((n) => n + 1)}
+            cards={clients.map((c, i) => (
+              <ClientTile key={i} client={c} />
+            ))}
+          />
         </div>
       </Card.Content>
     </Card>

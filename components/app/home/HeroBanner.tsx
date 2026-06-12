@@ -115,14 +115,14 @@ export default function HeroBanner() {
             raysOrigin="top-center"
             raysColor="#aac4ff"
             raysSpeed={1}
-            lightSpread={0.5}
-            rayLength={3}
+            lightSpread={1.4}
+            rayLength={3.5}
             followMouse
             mouseInfluence={0.1}
             noiseAmount={0}
             distortion={0}
             pulsating={false}
-            fadeDistance={1.4}
+            fadeDistance={1.6}
             saturation={1}
           />
         ) : (

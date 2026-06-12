@@ -13,6 +13,7 @@ interface GlowButtonProps {
 const THEME_COLORS: Record<string, { bg: string; colors: [string, string, string]; fg: string }> = {
   "1": { bg: "#72fa91", colors: ["#ffffff", "#bbf7d0", "#34d399"], fg: "#04210f" },
   "2": { bg: "#7301ff", colors: ["#ffffff", "#d4a8ff", "#9a5eff"], fg: "#ffffff" },
+  "3": { bg: "#2664ec", colors: ["#ffffff", "#bcd0fa", "#4d80ef"], fg: "#ffffff" },
 };
 
 export default function GlowButton({

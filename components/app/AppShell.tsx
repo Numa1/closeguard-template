@@ -32,6 +32,7 @@ import AnimatedWaveIcon from "@/components/AnimatedWaveIcon";
 import CloseGuardLogo from "@/components/CloseGuardLogo";
 import GlowButton from "@/components/GlowButton";
 import Logo2 from "@/components/Logo2";
+import Logo3 from "@/components/Logo3";
 
 interface NavItem {
   href: string;
@@ -138,6 +139,9 @@ function AppSidebar({ currentHref }: { currentHref: string }) {
           </span>
           <span className="cg-logo-2">
             <Logo2 className="h-8 w-auto shrink-0 text-[#7301ff]" />
+          </span>
+          <span className="cg-logo-3">
+            <Logo3 className="h-7 w-auto shrink-0 text-[#2664ec]" />
           </span>
           <span className="text-lg font-medium text-foreground">Closeguard</span>
         </div>

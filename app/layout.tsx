@@ -26,6 +26,17 @@ const gustavo = localFont({
   display: "swap",
 });
 
+const ppValve = localFont({
+  src: [
+    { path: "./fonts/valve/PPValve-Extralight.otf", weight: "300", style: "normal" },
+    { path: "./fonts/valve/PPValve-Medium.otf", weight: "400", style: "normal" },
+    { path: "./fonts/valve/PPValve-Medium.otf", weight: "500", style: "normal" },
+    { path: "./fonts/valve/PPValve-Extrabold.otf", weight: "700", style: "normal" },
+  ],
+  variable: "--font-pp-valve",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "CloseGuard — Analyse d'appels commerciaux",
   description:
@@ -40,7 +51,7 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`${ttFirsNeue.variable} ${gustavo.variable} h-full antialiased`}
+      className={`${ttFirsNeue.variable} ${gustavo.variable} ${ppValve.variable} h-full antialiased`}
     >
       <body className="min-h-full">
         <ThemeProvider />

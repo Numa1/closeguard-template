@@ -5,6 +5,7 @@ import AnimatedWaveIcon from "@/components/AnimatedWaveIcon";
 import CloseGuardLogo from "@/components/CloseGuardLogo";
 import GlowButton from "@/components/GlowButton";
 import Logo2 from "@/components/Logo2";
+import Logo3 from "@/components/Logo3";
 import CardSwap, { Card } from "@/components/effects/CardSwap";
 import PixelBlast from "@/components/effects/PixelBlast";
 import Silk from "@/components/effects/Silk";
@@ -36,6 +37,14 @@ const HERO_THEMES: Record<
     chipBg: "#ececf0",
     logoColor: "#7301ff",
   },
+  "3": {
+    bg: "#111729",
+    scrim:
+      "linear-gradient(90deg, #111729 0%, rgba(17,23,41,0.92) 26%, rgba(17,23,41,0.55) 46%, transparent 66%)",
+    pixelColor: "#2664ec",
+    chipBg: "#ffffff",
+    logoColor: "#2664ec",
+  },
 };
 
 function CardInner({
@@ -61,6 +70,8 @@ function CardInner({
       >
         {theme === "2" ? (
           <Logo2 className="h-6 w-auto" style={{ color: logoColor }} />
+        ) : theme === "3" ? (
+          <Logo3 className="h-6 w-auto" style={{ color: logoColor }} />
         ) : (
           <CloseGuardLogo className="h-6 w-auto" style={{ color: logoColor }} />
         )}

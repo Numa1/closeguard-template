@@ -9,6 +9,7 @@ import { useCurrentTheme } from "@/hooks/useCurrentTheme";
 const PIXEL_COLORS: Record<string, string> = {
   "1": "#bbf7d0,#86efac,#72fa91",
   "2": "#e9ddff,#b89aff,#7301ff",
+  "3": "#bcd0fa,#84a9f4,#2664ec",
 };
 
 interface Client {

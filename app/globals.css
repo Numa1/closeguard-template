@@ -67,6 +67,31 @@
   --accent-soft-hover: rgba(115, 1, 255, 0.2);
 }
 
+/* ─── Thème 3 : Bleu corporate ──────────────────── */
+[data-theme="3"] {
+  --cg-bg: #e2e7ef;
+  --cg-bg-card: #ffffff;
+  --cg-text-1: #000000;
+  --cg-text-2: #94a3b7;
+  --cg-cta: #2664ec;
+  --cg-cta-fg: #ffffff;
+  --cg-cta-soft-bg: rgba(38, 100, 236, 0.12);
+  --cg-cta-soft-fg: #1a4dba;
+  /* heatmap — ramp bleu */
+  --cg-heat-0: #e2e7ef;
+  --cg-heat-1: #bcd0fa;
+  --cg-heat-2: #84a9f4;
+  --cg-heat-3: #4d80ef;
+  --cg-heat-4: #1d4fc4;
+  /* HeroUI accent override */
+  --accent: #2664ec;
+  --accent-hover: #1d52c9;
+  --accent-foreground: #ffffff;
+  --accent-soft: rgba(38, 100, 236, 0.12);
+  --accent-soft-foreground: #1a4dba;
+  --accent-soft-hover: rgba(38, 100, 236, 0.2);
+}
+
 /* ─── Base styles ───────────────────────────────── */
 body {
   background: var(--cg-bg);
@@ -78,12 +103,19 @@ body {
   font-family: var(--font-gustavo), system-ui, sans-serif;
 }
 
+[data-theme="3"] body {
+  font-family: var(--font-pp-valve), system-ui, sans-serif;
+}
+
 /* Cards / composants blancs → suivent le thème */
 [data-theme="2"] .bg-white {
   background-color: var(--cg-bg-card);
 }
 
 /* ─── Bascule de logo par thème ─────────────────── */
-.cg-logo-2 { display: none; }
+.cg-logo-2,
+.cg-logo-3 { display: none; }
 [data-theme="2"] .cg-logo-1 { display: none; }
 [data-theme="2"] .cg-logo-2 { display: flex; align-items: center; }
+[data-theme="3"] .cg-logo-1 { display: none; }
+[data-theme="3"] .cg-logo-3 { display: flex; align-items: center; }

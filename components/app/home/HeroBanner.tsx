@@ -32,8 +32,8 @@ const HERO_THEMES: Record<
     scrim:
       "linear-gradient(90deg, #0a0118 0%, rgba(10,1,24,0.92) 26%, rgba(10,1,24,0.55) 46%, transparent 66%)",
     pixelColor: "#7301ff",
-    chipBg: "#1a0035",
-    logoColor: "#93fa00",
+    chipBg: "#ececf0",
+    logoColor: "#7301ff",
   },
 };
 

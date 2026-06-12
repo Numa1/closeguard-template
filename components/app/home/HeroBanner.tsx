@@ -7,6 +7,7 @@ import GlowButton from "@/components/GlowButton";
 import Logo2 from "@/components/Logo2";
 import CardSwap, { Card } from "@/components/effects/CardSwap";
 import PixelBlast from "@/components/effects/PixelBlast";
+import Silk from "@/components/effects/Silk";
 import { useCurrentTheme } from "@/hooks/useCurrentTheme";
 
 const HERO_THEMES: Record<
@@ -87,20 +88,30 @@ export default function HeroBanner() {
       className="relative overflow-hidden rounded-2xl p-7 shadow-sm md:h-[300px]"
       style={{ backgroundColor: t.bg }}
     >
-      {/* PixelBlast background */}
+      {/* Background effect */}
       <div className="absolute inset-0 z-0">
-        <PixelBlast
-          variant="circle"
-          pixelSize={3}
-          color={t.pixelColor}
-          patternScale={2}
-          patternDensity={1.2}
-          enableRipples
-          rippleIntensityScale={1.1}
-          speed={0.4}
-          edgeFade={0.2}
-          transparent
-        />
+        {theme === "2" ? (
+          <Silk
+            speed={4}
+            scale={1.2}
+            color="#3d00a0"
+            noiseIntensity={1.2}
+            rotation={0}
+          />
+        ) : (
+          <PixelBlast
+            variant="circle"
+            pixelSize={3}
+            color={t.pixelColor}
+            patternScale={2}
+            patternDensity={1.2}
+            enableRipples
+            rippleIntensityScale={1.1}
+            speed={0.4}
+            edgeFade={0.2}
+            transparent
+          />
+        )}
       </div>
 
       {/* left scrim for text readability */}

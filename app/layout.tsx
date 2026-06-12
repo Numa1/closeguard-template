@@ -26,14 +26,14 @@ const gustavo = localFont({
   display: "swap",
 });
 
-const ppValve = localFont({
+const spaceGrotesk = localFont({
   src: [
-    { path: "./fonts/valve/PPValve-Extralight.otf", weight: "300", style: "normal" },
-    { path: "./fonts/valve/PPValve-Medium.otf", weight: "400", style: "normal" },
-    { path: "./fonts/valve/PPValve-Medium.otf", weight: "500", style: "normal" },
-    { path: "./fonts/valve/PPValve-Extrabold.otf", weight: "700", style: "normal" },
+    { path: "./fonts/space-grotesk/SpaceGrotesk-Light.ttf", weight: "300", style: "normal" },
+    { path: "./fonts/space-grotesk/SpaceGrotesk-Regular.ttf", weight: "400", style: "normal" },
+    { path: "./fonts/space-grotesk/SpaceGrotesk-Medium.ttf", weight: "500", style: "normal" },
+    { path: "./fonts/space-grotesk/SpaceGrotesk-Bold.ttf", weight: "700", style: "normal" },
   ],
-  variable: "--font-pp-valve",
+  variable: "--font-space-grotesk",
   display: "swap",
 });
 
@@ -51,7 +51,7 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`${ttFirsNeue.variable} ${gustavo.variable} ${ppValve.variable} h-full antialiased`}
+      className={`${ttFirsNeue.variable} ${gustavo.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
       <body className="min-h-full">
         <ThemeProvider />

@@ -75,6 +75,8 @@ interface StackProps {
   pauseOnHover?: boolean;
   mobileClickOnly?: boolean;
   mobileBreakpoint?: number;
+  /** Appelé à chaque fois qu'une carte passe derrière (autoplay, clic ou drag). */
+  onSwap?: () => void;
 }
 
 interface StackItem {
@@ -93,6 +95,7 @@ export default function Stack({
   pauseOnHover = false,
   mobileClickOnly = false,
   mobileBreakpoint = 768,
+  onSwap,
 }: StackProps) {
   const [isMobile, setIsMobile] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
@@ -116,6 +119,7 @@ export default function Stack({
   }, [cards]);
 
   const sendToBack = (id: number) => {
+    onSwap?.();
     setStack((prev) => {
       const newStack = [...prev];
       const index = newStack.findIndex((card) => card.id === id);

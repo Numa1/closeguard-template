@@ -1,7 +1,15 @@
 "use client";
 
+import { useState } from "react";
 import { Card } from "@heroui/react";
 import Stack from "@/components/effects/Stack";
+import PixelCard from "@/components/effects/PixelCard";
+import { useCurrentTheme } from "@/hooks/useCurrentTheme";
+
+const PIXEL_COLORS: Record<string, string> = {
+  "1": "#bbf7d0,#86efac,#72fa91",
+  "2": "#e9ddff,#b89aff,#7301ff",
+};
 
 interface Client {
   name: string;
@@ -55,6 +63,9 @@ function ClientTile({ client }: { client: Client }) {
 }
 
 export default function ClientStack() {
+  const theme = useCurrentTheme();
+  const [swaps, setSwaps] = useState(0);
+
   return (
     <Card className="rounded-2xl bg-white shadow-sm">
       <Card.Content className="flex flex-col items-center gap-10 p-6 sm:flex-row sm:items-start sm:justify-center">
@@ -71,16 +82,28 @@ export default function ClientStack() {
         </div>
 
         <div className="shrink-0" style={{ width: 240, height: 240 }}>
-          <Stack
-            sensitivity={120}
-            sendToBackOnClick
-            autoplay
-            autoplayDelay={2400}
-            pauseOnHover
-            cards={clients.map((c, i) => (
-              <ClientTile key={i} client={c} />
-            ))}
-          />
+          <PixelCard
+            overlay
+            noHover
+            noFocus
+            trigger={swaps}
+            autoHideDelay={650}
+            gap={6}
+            speed={45}
+            colors={PIXEL_COLORS[theme] ?? PIXEL_COLORS["1"]}
+          >
+            <Stack
+              sensitivity={120}
+              sendToBackOnClick
+              autoplay
+              autoplayDelay={2400}
+              pauseOnHover
+              onSwap={() => setSwaps((n) => n + 1)}
+              cards={clients.map((c, i) => (
+                <ClientTile key={i} client={c} />
+              ))}
+            />
+          </PixelCard>
         </div>
       </Card.Content>
     </Card>

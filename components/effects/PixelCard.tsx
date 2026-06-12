@@ -146,6 +146,14 @@ interface PixelCardProps {
   noFocus?: boolean;
   className?: string;
   children?: ReactNode;
+  /** Pixels rendus par-dessus le contenu (sinon derrière). */
+  overlay?: boolean;
+  /** Désactive le déclenchement au survol (effet uniquement via `trigger`). */
+  noHover?: boolean;
+  /** À chaque incrément, déclenche un burst (appear puis disappear auto). */
+  trigger?: number;
+  /** Durée de vie du burst avant disparition (ms). */
+  autoHideDelay?: number;
 }
 
 export default function PixelCard({
@@ -156,6 +164,10 @@ export default function PixelCard({
   noFocus,
   className = "",
   children,
+  overlay = false,
+  noHover = false,
+  trigger,
+  autoHideDelay = 700,
 }: PixelCardProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -276,12 +288,21 @@ export default function PixelCard({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [finalGap, finalSpeed, finalColors, finalNoFocus]);
 
+  // Burst programmatique : appear puis disappear auto après autoHideDelay
+  useEffect(() => {
+    if (!trigger) return;
+    handleAnimation("appear");
+    const t = setTimeout(() => handleAnimation("disappear"), autoHideDelay);
+    return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [trigger]);
+
   return (
     <div
       ref={containerRef}
-      className={`pixel-card ${className}`}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
+      className={`pixel-card ${overlay ? "pixel-card--overlay " : ""}${className}`}
+      onMouseEnter={noHover ? undefined : onMouseEnter}
+      onMouseLeave={noHover ? undefined : onMouseLeave}
       onFocus={finalNoFocus ? undefined : onFocus}
       onBlur={finalNoFocus ? undefined : onBlur}
       tabIndex={finalNoFocus ? -1 : 0}

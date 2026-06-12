@@ -138,7 +138,7 @@ function AppSidebar({ currentHref }: { currentHref: string }) {
             <CloseGuardLogo className="h-7 w-auto shrink-0 text-[#000102]" />
           </span>
           <span className="cg-logo-2">
-            <Logo2 className="h-8 w-auto shrink-0 text-[#7301ff]" />
+            <Logo2 className="h-6 w-auto shrink-0 text-[#7301ff]" />
           </span>
           <span className="cg-logo-3">
             <Logo3 className="h-7 w-auto shrink-0 text-[#2664ec]" />

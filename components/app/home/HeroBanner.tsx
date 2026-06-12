@@ -70,7 +70,7 @@ function CardInner({
         style={{ backgroundColor: chipBg }}
       >
         {theme === "2" ? (
-          <Logo2 className="h-6 w-auto" style={{ color: logoColor }} />
+          <Logo2 className="h-5 w-auto" style={{ color: logoColor }} />
         ) : theme === "3" ? (
           <Logo3 className="h-6 w-auto" style={{ color: logoColor }} />
         ) : (

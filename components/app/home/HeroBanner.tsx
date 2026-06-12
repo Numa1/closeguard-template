@@ -9,6 +9,7 @@ import Logo3 from "@/components/Logo3";
 import CardSwap, { Card } from "@/components/effects/CardSwap";
 import PixelBlast from "@/components/effects/PixelBlast";
 import Silk from "@/components/effects/Silk";
+import LightRays from "@/components/effects/LightRays";
 import { useCurrentTheme } from "@/hooks/useCurrentTheme";
 
 const HERO_THEMES: Record<
@@ -108,6 +109,21 @@ export default function HeroBanner() {
             color="#3d00a0"
             noiseIntensity={1.2}
             rotation={0}
+          />
+        ) : theme === "3" ? (
+          <LightRays
+            raysOrigin="top-center"
+            raysColor="#aac4ff"
+            raysSpeed={1}
+            lightSpread={0.5}
+            rayLength={3}
+            followMouse
+            mouseInfluence={0.1}
+            noiseAmount={0}
+            distortion={0}
+            pulsating={false}
+            fadeDistance={1.4}
+            saturation={1}
           />
         ) : (
           <PixelBlast

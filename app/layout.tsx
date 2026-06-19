@@ -14,7 +14,7 @@ const spaceGrotesk = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "CloseGuard — Analyse d'appels commerciaux",
+  title: "Closium — Analyse d'appels commerciaux",
   description:
     "Analysez vos appels commerciaux et identifiez exactement pourquoi vous perdez des deals.",
 };

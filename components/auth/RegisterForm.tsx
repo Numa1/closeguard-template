@@ -26,7 +26,7 @@ export default function RegisterForm() {
       <div className="text-center">
         <div className="flex flex-col items-center gap-2">
           <ActiveLogo className="h-14 w-auto text-[#000102]" />
-          <h1 className="text-2xl font-medium text-[#000102]">Closeguard</h1>
+          <h1 className="text-2xl font-medium text-[#000102]">Closium</h1>
         </div>
         <p className="text-[#6b7280] text-sm mt-2">Commencez votre essai gratuit</p>
       </div>

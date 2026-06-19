@@ -133,7 +133,7 @@ function AppSidebar({ currentHref }: { currentHref: string }) {
       <Sidebar.Header className="gap-3">
         <div className="flex items-center gap-2 px-1 pt-1">
           <ActiveLogo className="h-7 w-auto shrink-0 text-[#000102]" />
-          <span className="text-lg font-medium text-foreground">Closeguard</span>
+          <span className="text-lg font-medium text-foreground">Closium</span>
         </div>
         <GlowButton className="w-full" onClick={() => {}}>
           <AnimatedWaveIcon className="size-4" />

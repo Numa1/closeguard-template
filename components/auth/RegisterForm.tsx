@@ -11,7 +11,7 @@ import {
   Separator,
   TextField,
 } from "@heroui/react";
-import CloseGuardLogo from "@/components/CloseGuardLogo";
+import ActiveLogo from "@/components/ActiveLogo";
 
 export default function RegisterForm() {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -25,7 +25,7 @@ export default function RegisterForm() {
       {/* Header */}
       <div className="text-center">
         <div className="flex flex-col items-center gap-2">
-          <CloseGuardLogo className="h-14 w-auto text-[#000102]" />
+          <ActiveLogo className="h-14 w-auto text-[#000102]" />
           <h1 className="text-2xl font-medium text-[#000102]">Closeguard</h1>
         </div>
         <p className="text-[#6b7280] text-sm mt-2">Commencez votre essai gratuit</p>

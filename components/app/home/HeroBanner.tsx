@@ -2,7 +2,7 @@
 
 import { Headphones, Target, Thunderbolt } from "@gravity-ui/icons";
 import AnimatedWaveIcon from "@/components/AnimatedWaveIcon";
-import CloseGuardLogo from "@/components/CloseGuardLogo";
+import ActiveLogo from "@/components/ActiveLogo";
 import GlowButton from "@/components/GlowButton";
 import CardSwap, { Card } from "@/components/effects/CardSwap";
 import PixelBlast from "@/components/effects/PixelBlast";
@@ -28,7 +28,7 @@ function CardInner({
         className="flex size-10 shrink-0 items-center justify-center rounded-xl"
         style={{ backgroundColor: CHIP_BG }}
       >
-        <CloseGuardLogo className="h-6 w-auto" style={{ color: LOGO_COLOR }} />
+        <ActiveLogo className="h-7 w-auto" style={{ color: LOGO_COLOR }} />
       </span>
       <div>
         <div className="flex items-center gap-2">

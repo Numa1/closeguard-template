@@ -5,7 +5,7 @@
 @theme inline {
   --color-accent: #72fa91;
   --color-background: #f6f6f6;
-  --font-sans: var(--font-tt-firs-neue);
+  --font-sans: var(--font-space-grotesk);
 }
 
 /* Default accent — in @layer base, declared after HeroUI → gagne la cascade */
@@ -24,7 +24,7 @@
   }
 }
 
-/* ─── Tokens communs à tous les thèmes ─────────── */
+/* ─── Tokens ─────────────────────────────────────── */
 :root {
   --cg-bg: #f6f6f6;
   --cg-bg-card: #ffffff;
@@ -42,80 +42,9 @@
   --cg-heat-4: #15803d;
 }
 
-/* ─── Thème 2 : Violet / Lime ───────────────────── */
-[data-theme="2"] {
-  --cg-bg: #f2f1f6;
-  --cg-bg-card: #ececf0;
-  --cg-text-1: #010101;
-  --cg-text-2: #6b7280;
-  --cg-cta: #7301ff;
-  --cg-cta-fg: #ffffff;
-  --cg-cta-soft-bg: rgba(115, 1, 255, 0.12);
-  --cg-cta-soft-fg: #5200b8;
-  /* heatmap — ramp violet */
-  --cg-heat-0: #edeaf5;
-  --cg-heat-1: #c4a8f5;
-  --cg-heat-2: #9a5eff;
-  --cg-heat-3: #7301ff;
-  --cg-heat-4: #4a00b8;
-  /* HeroUI accent override (unlayered > @layer base) */
-  --accent: #7301ff;
-  --accent-hover: #5800cc;
-  --accent-foreground: #ffffff;
-  --accent-soft: rgba(115, 1, 255, 0.12);
-  --accent-soft-foreground: #5200b8;
-  --accent-soft-hover: rgba(115, 1, 255, 0.2);
-}
-
-/* ─── Thème 3 : Bleu corporate ──────────────────── */
-[data-theme="3"] {
-  --cg-bg: #e2e7ef;
-  --cg-bg-card: #ffffff;
-  --cg-text-1: #000000;
-  --cg-text-2: #94a3b7;
-  --cg-cta: #2664ec;
-  --cg-cta-fg: #ffffff;
-  --cg-cta-soft-bg: rgba(38, 100, 236, 0.12);
-  --cg-cta-soft-fg: #1a4dba;
-  /* heatmap — ramp bleu */
-  --cg-heat-0: #e2e7ef;
-  --cg-heat-1: #bcd0fa;
-  --cg-heat-2: #84a9f4;
-  --cg-heat-3: #4d80ef;
-  --cg-heat-4: #1d4fc4;
-  /* HeroUI accent override */
-  --accent: #2664ec;
-  --accent-hover: #1d52c9;
-  --accent-foreground: #ffffff;
-  --accent-soft: rgba(38, 100, 236, 0.12);
-  --accent-soft-foreground: #1a4dba;
-  --accent-soft-hover: rgba(38, 100, 236, 0.2);
-}
-
 /* ─── Base styles ───────────────────────────────── */
 body {
   background: var(--cg-bg);
   color: var(--cg-text-1);
-  font-family: var(--font-tt-firs-neue), system-ui, sans-serif;
-}
-
-[data-theme="2"] body {
-  font-family: var(--font-gustavo), system-ui, sans-serif;
-}
-
-[data-theme="3"] body {
   font-family: var(--font-space-grotesk), system-ui, sans-serif;
 }
-
-/* Cards / composants blancs → suivent le thème */
-[data-theme="2"] .bg-white {
-  background-color: var(--cg-bg-card);
-}
-
-/* ─── Bascule de logo par thème ─────────────────── */
-.cg-logo-2,
-.cg-logo-3 { display: none; }
-[data-theme="2"] .cg-logo-1 { display: none; }
-[data-theme="2"] .cg-logo-2 { display: flex; align-items: center; }
-[data-theme="3"] .cg-logo-1 { display: none; }
-[data-theme="3"] .cg-logo-3 { display: flex; align-items: center; }

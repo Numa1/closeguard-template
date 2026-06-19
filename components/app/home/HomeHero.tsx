@@ -3,28 +3,16 @@
 import { Card } from "@heroui/react";
 import { RadialChart, TrendChip } from "@heroui-pro/react";
 import PixelCard from "@/components/effects/PixelCard";
-import { useCurrentTheme } from "@/hooks/useCurrentTheme";
 
 const SCORE = 7.1;
 const MAX = 10;
 
-const PIXEL_COLORS: Record<string, string> = {
-  "1": "#bbf7d0,#86efac,#72fa91",
-  "2": "#e9ddff,#b89aff,#7301ff",
-  "3": "#bcd0fa,#84a9f4,#2664ec",
-};
-
 export default function HomeHero() {
-  const theme = useCurrentTheme();
   const data = [{ name: "Score", value: SCORE, fill: "var(--accent)" }];
 
   return (
     <Card className="relative h-full overflow-hidden rounded-2xl bg-white shadow-sm">
-      <PixelCard
-        gap={6}
-        speed={40}
-        colors={PIXEL_COLORS[theme] ?? PIXEL_COLORS["1"]}
-      >
+      <PixelCard gap={6} speed={40} colors="#bbf7d0,#86efac,#72fa91">
         <Card.Content className="flex h-full flex-col items-center justify-between gap-4 p-6">
           <div className="flex w-full items-center justify-between">
             <span className="text-sm font-medium text-[#6b7280]">

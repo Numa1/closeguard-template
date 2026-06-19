@@ -31,8 +31,6 @@ import { AppLayout, Navbar, Sidebar } from "@heroui-pro/react";
 import AnimatedWaveIcon from "@/components/AnimatedWaveIcon";
 import CloseGuardLogo from "@/components/CloseGuardLogo";
 import GlowButton from "@/components/GlowButton";
-import Logo2 from "@/components/Logo2";
-import Logo3 from "@/components/Logo3";
 
 interface NavItem {
   href: string;
@@ -134,15 +132,7 @@ function AppSidebar({ currentHref }: { currentHref: string }) {
     <>
       <Sidebar.Header className="gap-3">
         <div className="flex items-center gap-2 px-1 pt-1">
-          <span className="cg-logo-1 flex items-center">
-            <CloseGuardLogo className="h-7 w-auto shrink-0 text-[#000102]" />
-          </span>
-          <span className="cg-logo-2">
-            <Logo2 className="h-6 w-auto shrink-0 text-[#7301ff]" />
-          </span>
-          <span className="cg-logo-3">
-            <Logo3 className="h-7 w-auto shrink-0 text-[#2664ec]" />
-          </span>
+          <CloseGuardLogo className="h-7 w-auto shrink-0 text-[#000102]" />
           <span className="text-lg font-medium text-foreground">Closeguard</span>
         </div>
         <GlowButton className="w-full" onClick={() => {}}>

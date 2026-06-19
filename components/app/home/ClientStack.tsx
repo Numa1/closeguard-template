@@ -4,13 +4,6 @@ import { useMemo, useState } from "react";
 import { Card } from "@heroui/react";
 import Stack from "@/components/effects/Stack";
 import PixelCard from "@/components/effects/PixelCard";
-import { useCurrentTheme } from "@/hooks/useCurrentTheme";
-
-const PIXEL_COLORS: Record<string, string> = {
-  "1": "#bbf7d0,#86efac,#72fa91",
-  "2": "#e9ddff,#b89aff,#7301ff",
-  "3": "#bcd0fa,#84a9f4,#2664ec",
-};
 
 interface Client {
   name: string;
@@ -64,11 +57,8 @@ function ClientTile({ client }: { client: Client }) {
 }
 
 export default function ClientStack() {
-  const theme = useCurrentTheme();
   const [swaps, setSwaps] = useState(0);
 
-  // Référence stable : sinon chaque re-render (setSwaps) recrée le tableau,
-  // ce qui réinitialise la pile du Stack et bloque le swipe/autoplay.
   const cards = useMemo(
     () => clients.map((c, i) => <ClientTile key={i} client={c} />),
     []
@@ -76,7 +66,6 @@ export default function ClientStack() {
 
   return (
     <Card className="relative overflow-hidden rounded-2xl bg-white shadow-sm">
-      {/* Pixels en arrière-plan de toute la carte (burst au swap) */}
       <div className="pointer-events-none absolute inset-0 z-0">
         <PixelCard
           noHover
@@ -85,7 +74,7 @@ export default function ClientStack() {
           autoHideDelay={650}
           gap={6}
           speed={45}
-          colors={PIXEL_COLORS[theme] ?? PIXEL_COLORS["1"]}
+          colors="#bbf7d0,#86efac,#72fa91"
         />
       </div>
 

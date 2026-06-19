@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import {
   Button,
   Form,
@@ -13,10 +14,11 @@ import {
 import ActiveLogo from "@/components/ActiveLogo";
 
 export default function LoginForm() {
+  const router = useRouter();
+
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const data = Object.fromEntries(new FormData(e.currentTarget));
-    console.log("Login:", data);
+    router.push("/home");
   }
 
   return (

@@ -16,7 +16,7 @@ export default function HomeHero() {
         <Card.Content className="flex h-full flex-col items-center justify-between gap-4 p-6">
           <div className="flex w-full items-center justify-between">
             <span className="text-sm font-medium text-[#6b7280]">
-              CloseGuard Score
+              Closium Score
             </span>
             <TrendChip trend="up">+32,4%</TrendChip>
           </div>

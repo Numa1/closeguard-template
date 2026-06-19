@@ -50,8 +50,8 @@ export default function LoginForm() {
       </div>
 
       {/* Form */}
-      <Form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-        <TextField isRequired name="email" type="email" className="w-full">
+      <Form className="flex flex-col gap-4">
+        <TextField name="email" type="email" className="w-full">
           <Label className="text-[#000102] text-sm mb-1 block">Adresse email</Label>
           <Input
             fullWidth
@@ -63,7 +63,7 @@ export default function LoginForm() {
           <FieldError className="text-red-500 text-xs mt-1" />
         </TextField>
 
-        <TextField isRequired name="password" type="password" className="w-full">
+        <TextField name="password" type="password" className="w-full">
           <Label className="text-[#000102] text-sm mb-1 block">Mot de passe</Label>
           <Input
             fullWidth
@@ -76,7 +76,8 @@ export default function LoginForm() {
         </TextField>
 
         <Button
-          type="submit"
+          type="button"
+          onPress={() => router.push("/home")}
           className="w-full bg-[#72fa91] text-[#000102] font-semibold hover:bg-[#5fe07d] transition-colors"
         >
           Se connecter

@@ -1,1 +1,1 @@
-﻿export { default } from "@/components/CloseGuardLogo";
+﻿export { default } from "@/components/ClosiumLogo";

@@ -1,16 +1,16 @@
 import { CSSProperties } from "react";
 
-interface CloseGuardLogoProps {
+interface ClosiumLogoProps {
   className?: string;
   style?: CSSProperties;
 }
 
 const logoStyles = `
-@keyframes cg-blink {
+@keyframes cl-blink {
   0%, 94%, 100% { transform: scaleY(1); }
   97% { transform: scaleY(0.05); }
 }
-@keyframes cg-look {
+@keyframes cl-look {
   0%, 10% { transform: translate(0px, 0px); }
   15%, 25% { transform: translate(18px, 4px); }
   30%, 40% { transform: translate(-14px, -6px); }
@@ -18,18 +18,18 @@ const logoStyles = `
   60%, 75% { transform: translate(14px, -8px); }
   80%, 100% { transform: translate(0px, 0px); }
 }
-.cg-pupil {
+.cl-pupil {
   transform-box: view-box;
   transform-origin: 107.35px 65.26px;
-  animation: cg-blink 4s infinite cubic-bezier(0.4, 0, 0.2, 1);
+  animation: cl-blink 4s infinite cubic-bezier(0.4, 0, 0.2, 1);
 }
-.cg-eye-pupil {
+.cl-eye-pupil {
   transform-box: view-box;
-  animation: cg-look 7s infinite cubic-bezier(0.4, 0, 0.2, 1);
+  animation: cl-look 7s infinite cubic-bezier(0.4, 0, 0.2, 1);
 }
 `;
 
-export default function CloseGuardLogo({ className, style }: CloseGuardLogoProps) {
+export default function ClosiumLogo({ className, style }: ClosiumLogoProps) {
   return (
     <svg
       viewBox="-8 -8 228 144"
@@ -47,9 +47,9 @@ export default function CloseGuardLogo({ className, style }: CloseGuardLogoProps
           fill="currentColor"
         />
       </g>
-      <g className="cg-eye-pupil">
+      <g className="cl-eye-pupil">
         <path
-          className="cg-pupil"
+          className="cl-pupil"
           d="M105.825 45.1134C116.976 44.2706 126.695 52.6372 127.519 63.7896C128.343 74.942 119.961 84.6466 108.807 85.4525C97.6793 86.2564 88.0024 77.8976 87.18 66.7714C86.3576 55.6451 94.7003 45.9543 105.825 45.1134Z"
           fill="currentColor"
         />

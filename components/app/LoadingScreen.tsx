@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import CloseGuardLogo from "@/components/CloseGuardLogo";
+import ClosiumLogo from "@/components/ClosiumLogo";
 import PixelBlast from "@/components/effects/PixelBlast";
 
 const DURATION = 3000;
@@ -66,7 +66,7 @@ export default function LoadingScreen() {
 
       {/* centered animated logo + progress */}
       <div className="relative z-10 flex flex-col items-center gap-6">
-        <CloseGuardLogo className="h-20 w-auto text-white" />
+        <ClosiumLogo className="h-20 w-auto text-white" />
         <div className="h-1 w-44 overflow-hidden rounded-full bg-white/10">
           <div
             className="h-full rounded-full bg-[#72fa91] transition-[width] duration-100 ease-out"

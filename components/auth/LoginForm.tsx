@@ -16,11 +16,6 @@ import ActiveLogo from "@/components/ActiveLogo";
 export default function LoginForm() {
   const router = useRouter();
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    router.push("/home");
-  }
-
   return (
     <div className="flex flex-col gap-6">
       {/* Header */}
@@ -29,7 +24,7 @@ export default function LoginForm() {
           <ActiveLogo className="h-14 w-auto text-[#000102]" />
           <h1 className="text-2xl font-medium text-[#000102]">Closium</h1>
         </div>
-        <p className="text-[#6b7280] text-sm mt-2">Accédez à votre espace</p>
+        <p className="text-[#6b7280] text-sm mt-2">Access your workspace</p>
       </div>
 
       {/* Google SSO */}
@@ -39,23 +34,23 @@ export default function LoginForm() {
         onPress={() => {}}
       >
         <GoogleIcon />
-        Continuer avec Google
+        Continue with Google
       </Button>
 
       {/* Divider */}
       <div className="flex items-center gap-3">
         <Separator className="flex-1" />
-        <span className="text-[#6b7280] text-xs">ou</span>
+        <span className="text-[#6b7280] text-xs">or</span>
         <Separator className="flex-1" />
       </div>
 
       {/* Form */}
       <Form className="flex flex-col gap-4">
         <TextField name="email" type="email" className="w-full">
-          <Label className="text-[#000102] text-sm mb-1 block">Adresse email</Label>
+          <Label className="text-[#000102] text-sm mb-1 block">Email address</Label>
           <Input
             fullWidth
-            placeholder="vous@exemple.com"
+            placeholder="you@example.com"
             variant="secondary"
             autoComplete="email"
             className="bg-[#f6f6f6] border border-black/10 text-[#000102] focus-visible:border-[#72fa91]! focus-visible:[box-shadow:0_0_0_2px_#72fa91]!"
@@ -64,7 +59,7 @@ export default function LoginForm() {
         </TextField>
 
         <TextField name="password" type="password" className="w-full">
-          <Label className="text-[#000102] text-sm mb-1 block">Mot de passe</Label>
+          <Label className="text-[#000102] text-sm mb-1 block">Password</Label>
           <Input
             fullWidth
             placeholder="••••••••"
@@ -80,7 +75,7 @@ export default function LoginForm() {
           onPress={() => router.push("/home")}
           className="w-full bg-[#72fa91] text-[#000102] font-semibold hover:bg-[#5fe07d] transition-colors"
         >
-          Se connecter
+          Sign in
         </Button>
       </Form>
 
@@ -90,12 +85,12 @@ export default function LoginForm() {
           href="/auth/forgot-password"
           className="text-[#6b7280] hover:text-[#000102] transition-colors"
         >
-          Mot de passe oublié ?
+          Forgot password?
         </Link>
         <p className="text-[#6b7280]">
-          Vous n&apos;avez pas de compte ?{" "}
+          Don&apos;t have an account?{" "}
           <Link href="/auth/register" className="text-[#000102] font-medium hover:text-black">
-            S&apos;inscrire
+            Sign up
           </Link>
         </p>
       </div>

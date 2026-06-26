@@ -3,34 +3,34 @@
 import { ReactNode } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import {
-  ArrowRightFromSquare,
   Bell,
+  Calendar,
   ChartColumn,
   CircleQuestion,
   CreditCard,
   FileText,
   Gear,
-  GraduationCap,
   Headphones,
   House,
-  Magnifier,
   Person,
   Persons,
   PlugConnection,
-  Receipt,
 } from "@gravity-ui/icons";
 import {
-  Avatar,
   Breadcrumbs,
   Button,
   Dropdown,
   Label,
-  Separator,
 } from "@heroui/react";
-import { AppLayout, Navbar, Sidebar } from "@heroui-pro/react";
+import { AppLayout, Navbar, Sidebar, useSidebar } from "@heroui-pro/react";
+import { I18nProvider } from "react-aria-components";
 import AnimatedWaveIcon from "@/components/AnimatedWaveIcon";
-import ActiveLogo from "@/components/ActiveLogo";
+import { Clock } from "@/components/app/Clock";
+import ClosiumLogo from "@/components/ClosiumLogo";
 import GlowButton from "@/components/GlowButton";
+import { GooeyInput } from "@/components/effects/GooeyInput";
+import { MemberProvider, useMember } from "@/components/app/MemberContext";
+import { SCOPES } from "@/components/app/home/data";
 
 interface NavItem {
   href: string;
@@ -48,50 +48,33 @@ interface NavGroup {
 
 const NAV_GROUPS: NavGroup[] = [
   {
-    label: "Pilotage",
+    label: "Overview",
     items: [
-      { href: "/home", label: "Home", icon: House },
-      { href: "/calls", label: "Appels", icon: Headphones, count: 3 },
+      { href: "/home", label: "Dashboard", icon: House },
+      { href: "/calls", label: "Call analysis", icon: Headphones, count: 3 },
+      { href: "/planning", label: "Planning", icon: Calendar },
+    ],
+  },
+  {
+    label: "Analytics",
+    items: [
       { href: "/sources", label: "Sources", icon: ChartColumn },
-      { href: "/closers", label: "Closers", icon: Persons },
+      { href: "/closers", label: "Closers", icon: Person },
+      { href: "/rapports", label: "Reports", icon: FileText, tag: { label: "Pro" } },
     ],
   },
   {
-    label: "Insights",
+    label: "Revenue & team",
     items: [
-      {
-        href: "/coaching",
-        label: "Coaching IA",
-        icon: GraduationCap,
-        tag: { label: "Nouveau" },
-      },
-      { href: "/rapports", label: "Rapports", icon: FileText, count: 2 },
-      {
-        href: "#",
-        label: "Intégrations",
-        icon: PlugConnection,
-        tag: { label: "Bientôt" },
-        soon: true,
-      },
+      { href: "/payments", label: "Payment tracking", icon: CreditCard },
+      { href: "/team", label: "Team access", icon: Persons },
     ],
   },
   {
-    label: "Compte",
+    label: "Account",
     items: [
-      {
-        href: "/pricing",
-        label: "Abonnement",
-        icon: CreditCard,
-        tag: { label: "Pro" },
-      },
-      {
-        href: "#",
-        label: "Facturation",
-        icon: Receipt,
-        tag: { label: "Bientôt" },
-        soon: true,
-      },
-      { href: "/settings", label: "Réglages", icon: Gear },
+      { href: "/tools", label: "Tools", icon: PlugConnection },
+      { href: "/settings", label: "Settings", icon: Gear },
     ],
   },
 ];
@@ -106,40 +89,57 @@ export default function AppShell({ children }: { children: ReactNode }) {
     ALL_ITEMS[0];
 
   return (
-    <AppLayout
-      navigate={router.push}
-      sidebarVariant="floating"
-      scrollMode="content"
-      navbar={
-        <AppNavbar
-          current={current}
-          onAccountAction={(key) => {
-            if (key === "sign-out") router.push("/");
-            if (key === "account") router.push("/settings");
-            if (key === "pricing") router.push("/pricing");
-          }}
-        />
-      }
-      sidebar={<AppSidebar currentHref={current.href} />}
-    >
-      {children}
-    </AppLayout>
+    <MemberProvider>
+      <I18nProvider locale="en-US">
+        <AppLayout
+          navigate={router.push}
+          sidebarVariant="floating"
+          scrollMode="content"
+          navbar={<AppNavbar current={current} />}
+          sidebar={<AppSidebar currentHref={current.href} />}
+        >
+          {children}
+        </AppLayout>
+      </I18nProvider>
+    </MemberProvider>
+  );
+}
+
+function SidebarHeader() {
+  const { isOpen } = useSidebar();
+  return (
+    <Sidebar.Header className="gap-3">
+      {/* Logo */}
+      <div className={`flex items-center px-1 pt-1 ${!isOpen ? "justify-center" : "justify-center gap-2"}`}>
+        <ClosiumLogo className="h-7 w-auto shrink-0 text-[#000102]" />
+        {isOpen && (
+          <span className="text-lg font-medium text-foreground">Closium</span>
+        )}
+      </div>
+
+      {/* Analyze a call */}
+      {!isOpen ? (
+        <button
+          type="button"
+          className="mx-auto flex size-9 items-center justify-center rounded-full"
+          style={{ backgroundColor: "#72fa91", color: "#04210f" }}
+        >
+          <AnimatedWaveIcon className="size-4" />
+        </button>
+      ) : (
+        <GlowButton className="w-full" onClick={() => {}}>
+          <AnimatedWaveIcon className="size-4" />
+          <span>Analyze a call</span>
+        </GlowButton>
+      )}
+    </Sidebar.Header>
   );
 }
 
 function AppSidebar({ currentHref }: { currentHref: string }) {
   const body = (
     <>
-      <Sidebar.Header className="gap-3">
-        <div className="flex items-center gap-2 px-1 pt-1">
-          <ActiveLogo className="h-7 w-auto shrink-0 text-[#000102]" />
-          <span className="text-lg font-medium text-foreground">Closium</span>
-        </div>
-        <GlowButton className="w-full" onClick={() => {}}>
-          <AnimatedWaveIcon className="size-4" />
-          <span data-sidebar="label">Analyser un appel</span>
-        </GlowButton>
-      </Sidebar.Header>
+      <SidebarHeader />
 
       <Sidebar.Content>
         {NAV_GROUPS.map((group) => (
@@ -201,23 +201,15 @@ function AppSidebar({ currentHref }: { currentHref: string }) {
 
       <Sidebar.Footer>
         <Sidebar.Menu aria-label="Aide">
-          <Sidebar.MenuItem href="#" id="help" textValue="Aide">
+          <Sidebar.MenuItem href="#" id="help" textValue="Help">
             <Sidebar.MenuIcon>
               <CircleQuestion className="size-4" />
             </Sidebar.MenuIcon>
-            <Sidebar.MenuLabel>Aide</Sidebar.MenuLabel>
+            <Sidebar.MenuLabel>Help</Sidebar.MenuLabel>
           </Sidebar.MenuItem>
         </Sidebar.Menu>
         <Sidebar.Separator />
-        <div className="flex items-center gap-2 px-1 py-1">
-          <Avatar size="sm">
-            <Avatar.Fallback>N</Avatar.Fallback>
-          </Avatar>
-          <div className="min-w-0" data-sidebar="label">
-            <p className="truncate text-sm font-medium text-foreground">Numa</p>
-            <p className="truncate text-xs text-muted">Plan Pro</p>
-          </div>
-        </div>
+        <MemberSwitcher />
       </Sidebar.Footer>
       <Sidebar.Rail />
     </>
@@ -231,13 +223,70 @@ function AppSidebar({ currentHref }: { currentHref: string }) {
   );
 }
 
-function AppNavbar({
-  current,
-  onAccountAction,
-}: {
-  current: NavItem;
-  onAccountAction: (key: string) => void;
-}) {
+function MemberIcon({ isTeam }: { isTeam: boolean }) {
+  const Icon = isTeam ? Persons : Person;
+  return (
+    <span
+      className="flex size-8 shrink-0 items-center justify-center rounded-full"
+      style={{
+        backgroundColor: isTeam ? "rgba(100,116,139,0.14)" : "rgba(114,250,145,0.2)",
+        color: isTeam ? "#64748b" : "#0b5c2e",
+      }}
+    >
+      <Icon className="size-4" />
+    </span>
+  );
+}
+
+function ChevronsIcon() {
+  return (
+    <svg className="size-3.5 shrink-0 text-muted" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
+      <path d="M8 9l4-4 4 4M8 15l4 4 4-4" />
+    </svg>
+  );
+}
+
+function MemberSwitcher() {
+  const { scope, setScope } = useMember();
+  return (
+    <Dropdown>
+      <Button
+        aria-label="Switch active member"
+        className="h-auto w-full justify-start gap-2 px-1 py-1.5"
+        variant="ghost"
+      >
+        <MemberIcon isTeam={scope.isTeam} />
+        <div className="min-w-0 flex-1 text-left" data-sidebar="label">
+          <p className="truncate text-sm font-medium text-foreground">{scope.label}</p>
+          <p className="truncate text-xs text-muted">{scope.sublabel}</p>
+        </div>
+        <span data-sidebar="label">
+          <ChevronsIcon />
+        </span>
+      </Button>
+      <Dropdown.Popover className="min-w-[240px]" placement="top start">
+        <Dropdown.Menu
+          onAction={(key) => {
+            const s = SCOPES.find((x) => x.id === String(key));
+            if (s) setScope(s);
+          }}
+        >
+          {SCOPES.map((s) => (
+            <Dropdown.Item key={s.id} id={s.id} textValue={s.label}>
+              <MemberIcon isTeam={s.isTeam} />
+              <div className="min-w-0">
+                <Label className="block truncate">{s.label}</Label>
+                <span className="block truncate text-xs text-muted">{s.sublabel}</span>
+              </div>
+            </Dropdown.Item>
+          ))}
+        </Dropdown.Menu>
+      </Dropdown.Popover>
+    </Dropdown>
+  );
+}
+
+function AppNavbar({ current }: { current: NavItem }) {
   const CurrentIcon = current.icon;
   return (
     <Navbar maxWidth="full">
@@ -254,9 +303,15 @@ function AppNavbar({
         </Breadcrumbs>
         <Navbar.Spacer />
         <Navbar.Content>
-          <Navbar.Item aria-label="Rechercher">
-            <Magnifier className="size-4" />
-          </Navbar.Item>
+          <div className="mr-1 hidden items-center sm:flex" aria-label="Current time">
+            <Clock />
+          </div>
+          <GooeyInput
+            placeholder="Search calls…"
+            collapsedWidth={42}
+            expandedWidth={220}
+            expandedOffset={40}
+          />
           <Navbar.Item aria-label="Notifications">
             <span className="relative inline-flex">
               <Bell className="size-4" />
@@ -268,40 +323,6 @@ function AppNavbar({
               </span>
             </span>
           </Navbar.Item>
-          <Navbar.Separator />
-          <Dropdown>
-            <Button isIconOnly aria-label="Menu du compte" variant="ghost">
-              <Avatar className="size-6" color="success" variant="soft">
-                <Avatar.Fallback className="text-xs font-semibold">N</Avatar.Fallback>
-              </Avatar>
-            </Button>
-            <Dropdown.Popover className="min-w-[210px]" placement="bottom end">
-              <Dropdown.Menu onAction={(key) => onAccountAction(String(key))}>
-                <Dropdown.Item id="account" textValue="Compte">
-                  <Person className="size-4 text-muted" />
-                  <Label>Compte</Label>
-                </Dropdown.Item>
-                <Dropdown.Item id="pricing" textValue="Abonnement">
-                  <CreditCard className="size-4 text-muted" />
-                  <Label>Abonnement</Label>
-                  <span
-                    className="ml-auto rounded-full px-2 py-0.5 text-[11px] font-medium"
-                    style={{
-                      backgroundColor: "var(--cg-cta-soft-bg)",
-                      color: "var(--cg-cta-soft-fg)",
-                    }}
-                  >
-                    Pro
-                  </span>
-                </Dropdown.Item>
-                <Separator />
-                <Dropdown.Item id="sign-out" textValue="Déconnexion">
-                  <ArrowRightFromSquare className="size-4 text-muted" />
-                  <Label>Déconnexion</Label>
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown.Popover>
-          </Dropdown>
         </Navbar.Content>
       </Navbar.Header>
     </Navbar>

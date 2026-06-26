@@ -14,9 +14,9 @@ const spaceGrotesk = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Closium — Analyse d'appels commerciaux",
+  title: "Closium — Sales call analysis",
   description:
-    "Analysez vos appels commerciaux et identifiez exactement pourquoi vous perdez des deals.",
+    "Analyze your sales calls and pinpoint exactly why you lose deals.",
 };
 
 export default function RootLayout({
@@ -25,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className={`${spaceGrotesk.variable} h-full antialiased`}>
+    <html lang="en" className={`${spaceGrotesk.variable} h-full antialiased`}>
       <body className="min-h-full">{children}</body>
     </html>
   );

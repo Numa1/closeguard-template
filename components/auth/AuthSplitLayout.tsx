@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import PixelBlast from "@/components/effects/PixelBlast";
+import LazyPixelBlast from "@/components/effects/LazyPixelBlast";
 
 interface AuthLayoutProps {
   rightContent: ReactNode;
@@ -10,7 +10,7 @@ export default function AuthLayout({ rightContent }: AuthLayoutProps) {
     <div className="relative min-h-screen flex items-center justify-center px-6 py-12 bg-[#f6f6f6] overflow-hidden">
       {/* Animated PixelBlast background */}
       <div className="absolute inset-0 z-0">
-        <PixelBlast
+        <LazyPixelBlast
           variant="circle"
           pixelSize={3}
           color="#72fa91"

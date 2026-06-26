@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Build output — ne pas linter le JS minifié généré
+    ".vercel/**",
+    "coverage/**",
   ]),
 ]);
 

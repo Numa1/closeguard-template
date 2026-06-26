@@ -26,14 +26,23 @@
 
 /* ─── Tokens ─────────────────────────────────────── */
 :root {
-  --cg-bg: #f6f6f6;
+  --cg-bg: #f4f5f6;
   --cg-bg-card: #ffffff;
+  --cg-slate: #64748b;
   --cg-text-1: #000102;
   --cg-text-2: #6b7280;
+  --cg-text-3: #9ca3af;
   --cg-cta: #72fa91;
   --cg-cta-fg: #04210f;
   --cg-cta-soft-bg: rgba(114, 250, 145, 0.2);
   --cg-cta-soft-fg: #0b5c2e;
+  /* géométrie + hairlines partagées */
+  --cg-radius: 1rem;
+  --cg-border: rgba(16, 24, 40, 0.06);
+  --cg-border-dark: rgba(255, 255, 255, 0.07);
+  /* cadence d'animation unifiée (voir .cg-fade / .cg-fade-in) */
+  --cg-step: 70ms;    /* écart entre sections (× --cg-base) */
+  --cg-stagger: 45ms; /* écart entre éléments d'une même section (× --cg-i) */
   /* heatmap */
   --cg-heat-0: #edf0f2;
   --cg-heat-1: #c7f7d5;
@@ -47,4 +56,94 @@ body {
   background: var(--cg-bg);
   color: var(--cg-text-1);
   font-family: var(--font-space-grotesk), system-ui, sans-serif;
+}
+
+/* ─── Animations ─────────────────────────────────── */
+@keyframes cg-fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cg-fade-sm {
+  from { opacity: 0; transform: translateY(7px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Cascade unifiée et robuste au réordonnancement.
+   delay = (base de section × --cg-step) + (index local × --cg-stagger)
+   --cg-base est posé sur chaque section dans page.tsx (positionnel → reorder-safe)
+   --cg-i est posé localement par chaque élément/élément de liste (length-safe)
+   Les custom properties héritent : un enfant lit le --cg-base de sa section. */
+
+/* Bloc entrant (cartes KPI, lignes de liste, items) — mouvement 16px */
+.cg-fade-in {
+  animation: cg-fade-up 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--cg-base, 0) * var(--cg-step) + var(--cg-i, 0) * var(--cg-stagger));
+  will-change: opacity, transform;
+}
+
+/* Élément interne en cascade (header, chiffre, chart, note) — mouvement 7px */
+.cg-fade {
+  animation: cg-fade-sm 0.38s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--cg-base, 0) * var(--cg-step) + var(--cg-i, 0) * var(--cg-stagger));
+  will-change: opacity, transform;
+}
+
+/* WaveReveal (animata) — révélation lettre par lettre + flou optionnel */
+@keyframes reveal-up {
+  0%   { opacity: 0; transform: translateY(80%); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes reveal-down {
+  0%   { opacity: 0; transform: translateY(-80%); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes content-blur {
+  0%   { filter: blur(0.3rem); }
+  100% { filter: blur(0); }
+}
+/* animation-fill-mode:forwards — non natif Tailwind, requis par WaveReveal
+   pour conserver opacity:1 une fois la révélation terminée */
+@utility fill-mode-forwards {
+  animation-fill-mode: forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cg-fade-in,
+  .cg-fade {
+    animation: none;
+  }
+  [class*="animate-[reveal"] {
+    animation: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+  }
+}
+
+/* ─── Carte premium : hairline + ombre étagée ────── */
+@layer components {
+  .cg-card {
+    background: var(--cg-bg-card);
+    border-radius: var(--cg-radius);
+    box-shadow:
+      0 0 0 1px rgba(16, 24, 40, 0.05),
+      0 1px 2px rgba(16, 24, 40, 0.04),
+      0 4px 12px -2px rgba(16, 24, 40, 0.06);
+  }
+  .cg-card-interactive {
+    transition:
+      box-shadow 150ms ease-out,
+      transform 150ms ease-out;
+  }
+  .cg-card-interactive:hover {
+    box-shadow:
+      0 0 0 1px rgba(16, 24, 40, 0.08),
+      0 2px 4px rgba(16, 24, 40, 0.05),
+      0 10px 28px -6px rgba(16, 24, 40, 0.12);
+  }
+  /* Anneau de focus de marque, homogène */
+  .cg-focus:focus-visible {
+    outline: 2px solid var(--cg-cta);
+    outline-offset: 2px;
+  }
 }

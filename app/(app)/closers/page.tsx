@@ -4,7 +4,7 @@ export default function ClosersPage() {
   return (
     <PagePlaceholder
       title="Closers"
-      description="Performance individuelle de vos closers."
+      description="Individual performance of your closers."
     />
   );
 }

@@ -28,7 +28,7 @@ export default function RegisterForm() {
           <ActiveLogo className="h-14 w-auto text-[#000102]" />
           <h1 className="text-2xl font-medium text-[#000102]">Closium</h1>
         </div>
-        <p className="text-[#6b7280] text-sm mt-2">Commencez votre essai gratuit</p>
+        <p className="text-[#6b7280] text-sm mt-2">Start your free trial</p>
       </div>
 
       {/* Google SSO */}
@@ -38,13 +38,13 @@ export default function RegisterForm() {
         onPress={() => {}}
       >
         <GoogleIcon />
-        Continuer avec Google
+        Continue with Google
       </Button>
 
       {/* Divider */}
       <div className="flex items-center gap-3">
         <Separator className="flex-1" />
-        <span className="text-[#6b7280] text-xs">ou</span>
+        <span className="text-[#6b7280] text-xs">or</span>
         <Separator className="flex-1" />
       </div>
 
@@ -53,10 +53,10 @@ export default function RegisterForm() {
         {/* First + Last name row */}
         <div className="flex gap-3">
           <TextField isRequired name="firstName" className="flex-1">
-            <Label className="text-[#000102] text-sm mb-1 block">Prénom</Label>
+            <Label className="text-[#000102] text-sm mb-1 block">First name</Label>
             <Input
               fullWidth
-              placeholder="Jean"
+              placeholder="John"
               variant="secondary"
               autoComplete="given-name"
               className="bg-[#f6f6f6] border border-black/10 text-[#000102] focus-visible:border-[#72fa91]! focus-visible:[box-shadow:0_0_0_2px_#72fa91]!"
@@ -65,10 +65,10 @@ export default function RegisterForm() {
           </TextField>
 
           <TextField isRequired name="lastName" className="flex-1">
-            <Label className="text-[#000102] text-sm mb-1 block">Nom</Label>
+            <Label className="text-[#000102] text-sm mb-1 block">Last name</Label>
             <Input
               fullWidth
-              placeholder="Dupont"
+              placeholder="Doe"
               variant="secondary"
               autoComplete="family-name"
               className="bg-[#f6f6f6] border border-black/10 text-[#000102] focus-visible:border-[#72fa91]! focus-visible:[box-shadow:0_0_0_2px_#72fa91]!"
@@ -78,10 +78,10 @@ export default function RegisterForm() {
         </div>
 
         <TextField isRequired name="email" type="email" className="w-full">
-          <Label className="text-[#000102] text-sm mb-1 block">Adresse email</Label>
+          <Label className="text-[#000102] text-sm mb-1 block">Email address</Label>
           <Input
             fullWidth
-            placeholder="vous@exemple.com"
+            placeholder="you@example.com"
             variant="secondary"
             autoComplete="email"
             className="bg-[#f6f6f6] border border-black/10 text-[#000102] focus-visible:border-[#72fa91]! focus-visible:[box-shadow:0_0_0_2px_#72fa91]!"
@@ -90,7 +90,7 @@ export default function RegisterForm() {
         </TextField>
 
         <TextField isRequired name="password" type="password" minLength={8} className="w-full">
-          <Label className="text-[#000102] text-sm mb-1 block">Mot de passe</Label>
+          <Label className="text-[#000102] text-sm mb-1 block">Password</Label>
           <Input
             fullWidth
             placeholder="••••••••"
@@ -98,7 +98,7 @@ export default function RegisterForm() {
             autoComplete="new-password"
             className="bg-[#f6f6f6] border border-black/10 text-[#000102] focus-visible:border-[#72fa91]! focus-visible:[box-shadow:0_0_0_2px_#72fa91]!"
           />
-          <Description className="text-[#6b7280] text-xs mt-1">8 caractères minimum</Description>
+          <Description className="text-[#6b7280] text-xs mt-1">8 characters minimum</Description>
           <FieldError className="text-red-500 text-xs mt-1" />
         </TextField>
 
@@ -106,15 +106,15 @@ export default function RegisterForm() {
           type="submit"
           className="w-full bg-[#72fa91] text-[#000102] font-semibold hover:bg-[#5fe07d] transition-colors"
         >
-          Créer mon compte
+          Create my account
         </Button>
       </Form>
 
       {/* Back to login */}
       <p className="text-center text-sm text-[#6b7280]">
-        Déjà un compte ?{" "}
+        Already have an account?{" "}
         <Link href="/" className="text-[#000102] font-medium hover:text-black">
-          Se connecter
+          Sign in
         </Link>
       </p>
     </div>

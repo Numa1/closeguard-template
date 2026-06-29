@@ -1,10 +1,5 @@
-import PagePlaceholder from "@/components/app/PagePlaceholder";
+import CallAnalysis from "@/components/app/calls/CallAnalysis";
 
 export default function CallsPage() {
-  return (
-    <PagePlaceholder
-      title="Call analysis"
-      description="Your upcoming and analyzed calls."
-    />
-  );
+  return <CallAnalysis />;
 }

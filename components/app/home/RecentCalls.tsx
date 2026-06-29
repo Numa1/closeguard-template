@@ -2,11 +2,11 @@
 
 import { CSSProperties } from "react";
 import { ChevronDown } from "@gravity-ui/icons";
-import { Accordion, Avatar, Button, Card, Chip } from "@heroui/react";
+import { Accordion, Avatar, Button, Card } from "@heroui/react";
 
 import { CardGlow } from "@/components/effects/CardGlow";
 import { useMember } from "@/components/app/MemberContext";
-import { C, recentCalls, type CallStatus } from "./data";
+import { C, recentCalls, TONE, type CallStatus, type ToneKey } from "./data";
 
 const STATUS_LABEL: Record<CallStatus, string> = {
   hard: "Hard to Close",
@@ -15,31 +15,43 @@ const STATUS_LABEL: Record<CallStatus, string> = {
   poor: "Poorly Executed",
 };
 
-const STATUS_COLOR: Record<CallStatus, "success" | "warning" | "danger"> = {
-  hard: "warning",
-  closable: "success",
-  not: "danger",
-  poor: "danger",
+const STATUS_TONE: Record<CallStatus, ToneKey> = {
+  hard: "amber",
+  closable: "green",
+  not: "red",
+  poor: "red",
 };
 
-function scoreColor(score: number): string {
-  if (score >= 7) return C.green;
-  if (score >= 5) return C.amber;
-  return C.red;
+function scoreTone(score: number): ToneKey {
+  if (score >= 7) return "green";
+  if (score >= 5) return "amber";
+  return "red";
 }
 
 function ScoreBar({ score }: { score: number }) {
-  const color = scoreColor(score);
+  const t = TONE[scoreTone(score)];
   const pct = Math.round((score / 10) * 100);
   return (
     <div className="flex items-center gap-2">
-      <span className="w-7 shrink-0 text-sm font-semibold tabular-nums" style={{ color }}>
+      <span className="w-7 shrink-0 text-sm font-semibold tabular-nums" style={{ color: t.text }}>
         {score.toFixed(1)}
       </span>
       <div className="h-1.5 w-14 overflow-hidden rounded-full" style={{ backgroundColor: C.track }}>
-        <div className="h-full rounded-full" style={{ width: `${pct}%`, backgroundColor: color }} />
+        <div className="h-full rounded-full" style={{ width: `${pct}%`, backgroundColor: t.solid }} />
       </div>
     </div>
+  );
+}
+
+function StatusBadge({ status }: { status: CallStatus }) {
+  const t = TONE[STATUS_TONE[status]];
+  return (
+    <span
+      className="inline-flex items-center rounded-full px-2 py-0.5 text-[12px] font-medium"
+      style={{ backgroundColor: t.soft, color: t.text }}
+    >
+      {STATUS_LABEL[status]}
+    </span>
   );
 }
 
@@ -95,7 +107,12 @@ export default function RecentCalls() {
                           {call.name}
                         </span>
                         {call.isNew && (
-                          <Chip color="success" size="sm" variant="soft">NEW</Chip>
+                          <span
+                            className="rounded-full px-2 py-0.5 text-[11px] font-medium"
+                            style={{ backgroundColor: "var(--cg-cta-soft-bg)", color: "var(--cg-cta-soft-fg)" }}
+                          >
+                            New
+                          </span>
                         )}
                       </div>
                       <span className="text-xs" style={{ color: C.text2 }}>
@@ -105,9 +122,7 @@ export default function RecentCalls() {
 
                     <div className="hidden w-28 shrink-0 flex-col items-end gap-1.5 sm:flex">
                       <ScoreBar score={call.score} />
-                      <Chip color={STATUS_COLOR[call.status]} size="sm" variant="soft">
-                        {STATUS_LABEL[call.status]}
-                      </Chip>
+                      <StatusBadge status={call.status} />
                     </div>
 
                     <Accordion.Indicator>
@@ -120,9 +135,7 @@ export default function RecentCalls() {
                   <Accordion.Body className="pb-4 pt-1">
                     <div className="mb-3 flex items-center gap-3 sm:hidden">
                       <ScoreBar score={call.score} />
-                      <Chip color={STATUS_COLOR[call.status]} size="sm" variant="soft">
-                        {STATUS_LABEL[call.status]}
-                      </Chip>
+                      <StatusBadge status={call.status} />
                     </div>
 
                     <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">

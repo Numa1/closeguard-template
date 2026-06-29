@@ -1,10 +1,5 @@
-import PagePlaceholder from "@/components/app/PagePlaceholder";
+import PlanningView from "@/components/app/planning/PlanningView";
 
 export default function PlanningPage() {
-  return (
-    <PagePlaceholder
-      title="Planning"
-      description="Your meetings synced from Calendly, Cal.com and iClosed."
-    />
-  );
+  return <PlanningView />;
 }

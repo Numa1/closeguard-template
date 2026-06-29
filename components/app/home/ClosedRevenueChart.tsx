@@ -2,7 +2,8 @@
 
 import { CSSProperties } from "react";
 import { Card } from "@heroui/react";
-import { ChartTooltip, ComposedChart, TrendChip } from "@heroui-pro/react";
+import { ChartTooltip, ComposedChart } from "@heroui-pro/react";
+import { TrendBadge } from "./TrendBadge";
 import { CardGlow } from "@/components/effects/CardGlow";
 import { TextShimmer } from "@/components/core/text-shimmer";
 import { useMember } from "@/components/app/MemberContext";
@@ -33,7 +34,7 @@ export default function ClosedRevenueChart() {
             Contracted vs collected · {scope.isTeam ? PERIOD.label : scope.label}
           </Card.Description>
         </div>
-        <TrendChip trend={scope.trend}>{totals.delta}</TrendChip>
+        <TrendBadge trend={scope.trend}>{totals.delta}</TrendBadge>
       </Card.Header>
 
       <Card.Content className="flex flex-col gap-4">

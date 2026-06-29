@@ -30,6 +30,16 @@ export const C = {
   slateLight: "#94a3b8",
 };
 
+/* Tons sémantiques unifiés — source unique pour vert/ambre/rouge.
+   text = teinte foncée lisible · solid = remplissage vif · soft = fond léger.
+   À utiliser partout (chips statut, scores, issues) pour l'homogénéité. */
+export type ToneKey = "green" | "amber" | "red";
+export const TONE: Record<ToneKey, { solid: string; text: string; soft: string }> = {
+  green: { solid: C.green, text: C.greenDark, soft: "rgba(34,197,94,0.12)" },
+  amber: { solid: C.amber, text: C.amberDark, soft: "rgba(245,158,11,0.14)" },
+  red: { solid: C.red, text: C.redDark, soft: "rgba(239,68,68,0.12)" },
+};
+
 /* Hauteur commune des 3 charts diagnostic — garantit l'alignement des bas de carte */
 export const CHART_H = 200;
 

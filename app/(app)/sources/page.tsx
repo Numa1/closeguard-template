@@ -1,10 +1,5 @@
-import PagePlaceholder from "@/components/app/PagePlaceholder";
+import SourcesView from "@/components/app/sources/SourcesView";
 
 export default function SourcesPage() {
-  return (
-    <PagePlaceholder
-      title="Sources"
-      description="Performance by lead source."
-    />
-  );
+  return <SourcesView />;
 }

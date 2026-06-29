@@ -75,19 +75,35 @@ body {
    --cg-i est posé localement par chaque élément/élément de liste (length-safe)
    Les custom properties héritent : un enfant lit le --cg-base de sa section. */
 
-/* Bloc entrant (cartes KPI, lignes de liste, items) — mouvement 16px */
+/* Bloc entrant (cartes KPI, lignes de liste, items) — mouvement 16px.
+   fill-mode `backwards` (pas `both`) : pendant le delay l'élément prend l'état
+   initial (opacity 0), mais après l'animation il revient à son état naturel
+   SANS transform résiduel — sinon la couche GPU désactive l'antialiasing
+   sous-pixel et rend le texte flou. Pas de `will-change` pour la même raison. */
 .cg-fade-in {
-  animation: cg-fade-up 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: cg-fade-up 0.55s cubic-bezier(0.16, 1, 0.3, 1) backwards;
   animation-delay: calc(var(--cg-base, 0) * var(--cg-step) + var(--cg-i, 0) * var(--cg-stagger));
-  will-change: opacity, transform;
 }
 
 /* Élément interne en cascade (header, chiffre, chart, note) — mouvement 7px */
 .cg-fade {
-  animation: cg-fade-sm 0.38s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: cg-fade-sm 0.38s cubic-bezier(0.16, 1, 0.3, 1) backwards;
   animation-delay: calc(var(--cg-base, 0) * var(--cg-step) + var(--cg-i, 0) * var(--cg-stagger));
-  will-change: opacity, transform;
 }
+
+/* Cascade des lignes de table — re-déclenchée au changement d'onglet/filtre
+   (le conteneur change de `key` → DataGrid remonté → lignes ré-insérées). */
+.cg-rows-cascade tbody .table__row {
+  animation: cg-fade-sm 0.4s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+.cg-rows-cascade tbody .table__row:nth-child(1) { animation-delay: 0ms; }
+.cg-rows-cascade tbody .table__row:nth-child(2) { animation-delay: 40ms; }
+.cg-rows-cascade tbody .table__row:nth-child(3) { animation-delay: 80ms; }
+.cg-rows-cascade tbody .table__row:nth-child(4) { animation-delay: 120ms; }
+.cg-rows-cascade tbody .table__row:nth-child(5) { animation-delay: 160ms; }
+.cg-rows-cascade tbody .table__row:nth-child(6) { animation-delay: 200ms; }
+.cg-rows-cascade tbody .table__row:nth-child(7) { animation-delay: 240ms; }
+.cg-rows-cascade tbody .table__row:nth-child(n + 8) { animation-delay: 280ms; }
 
 /* WaveReveal (animata) — révélation lettre par lettre + flou optionnel */
 @keyframes reveal-up {
@@ -110,7 +126,8 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .cg-fade-in,
-  .cg-fade {
+  .cg-fade,
+  .cg-rows-cascade tbody .table__row {
     animation: none;
   }
   [class*="animate-[reveal"] {
@@ -146,4 +163,26 @@ body {
     outline: 2px solid var(--cg-cta);
     outline-offset: 2px;
   }
+}
+
+/* Planning (Agenda) — "today" en vert de marque au lieu du rouge danger par défaut */
+.agenda [data-today] .agenda__month-cell-date {
+  background-color: var(--cg-cta);
+  color: var(--cg-cta-fg);
+}
+.agenda {
+  --agenda-current-time-color: var(--cg-cta);
+}
+
+/* Header équilibré : même espace au-dessus (p-4 de la carte) qu'en-dessous */
+.agenda__header {
+  padding-top: 0;
+  padding-bottom: 1rem;
+}
+
+/* Grille du mois arrondie + hairline (le calendrier devient un bloc net) */
+.agenda__month-grid {
+  border: 1px solid var(--cg-border);
+  border-radius: 0.75rem;
+  overflow: hidden;
 }

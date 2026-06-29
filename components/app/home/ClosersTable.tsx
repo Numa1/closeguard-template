@@ -30,11 +30,11 @@ import {
   type DataGridColumn,
   type DataGridSelection,
   type DataGridSortDescriptor,
-  TrendChip,
 } from "@heroui-pro/react";
 import { CardGlow } from "@/components/effects/CardGlow";
 import { GooeyInput } from "@/components/effects/GooeyInput";
 import { useMember } from "@/components/app/MemberContext";
+import { TrendBadge } from "./TrendBadge";
 import {
   C,
   type Closer,
@@ -44,6 +44,7 @@ import {
   scopeForCloser,
   TEAM_SCOPE,
   teamScoreAvg,
+  TONE,
 } from "./data";
 
 /* -------------------------------------------------------------------------------------------------
@@ -185,9 +186,12 @@ export default function ClosersTable() {
         header: "Role",
         allowsSorting: true,
         cell: (c) => (
-          <Chip size="sm" variant="soft" color={c.role === "Closer" ? "accent" : "default"}>
-            <Chip.Label>{c.role}</Chip.Label>
-          </Chip>
+          <span
+            className="inline-flex items-center rounded-full px-2 py-0.5 text-[12px] font-medium"
+            style={{ backgroundColor: "rgba(100,116,139,0.12)", color: C.slate }}
+          >
+            {c.role}
+          </span>
         ),
       },
       {
@@ -433,10 +437,16 @@ function CloserCell({ closer }: { closer: Closer }) {
           {closer.name}
         </span>
         {closer.tag && (
-          <Chip color={closer.tag === "top" ? "success" : "warning"} size="sm" variant="soft">
+          <span
+            className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-medium"
+            style={{
+              backgroundColor: closer.tag === "top" ? TONE.green.soft : TONE.amber.soft,
+              color: closer.tag === "top" ? TONE.green.text : TONE.amber.text,
+            }}
+          >
             <CircleFill width={6} />
-            <Chip.Label>{closer.tag === "top" ? "Top" : "Coach"}</Chip.Label>
-          </Chip>
+            {closer.tag === "top" ? "Top" : "Coach"}
+          </span>
         )}
       </div>
     </div>
@@ -507,7 +517,7 @@ function TrendCell({ closer }: { closer: Closer }) {
           />
         </AreaChart>
       </div>
-      <TrendChip trend={closer.trend}>{closer.delta}</TrendChip>
+      <TrendBadge trend={closer.trend}>{closer.delta}</TrendBadge>
     </div>
   );
 }

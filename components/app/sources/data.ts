@@ -83,14 +83,18 @@ export const revPerLead = (s: SourceRow) => (s.leads > 0 ? Math.round(s.contract
    `sources` ci-dessus = "all time" (base). Les autres plages sont des
    sous-ensembles (volumes croissants 7d<30d<90d<all) avec taux légèrement
    meilleurs sur le récent. Tout (KPIs, cartes, charts, table) en dérive. */
-const RANGE_FACTOR: Record<string, number> = { "7d": 0.28, "30d": 0.78, "90d": 0.95, all: 1 };
-const RANGE_RATE_DELTA: Record<string, number> = { "7d": 0.03, "30d": 0.01, "90d": 0, all: 0 };
+const RANGE_CONFIG: Record<string, { factor: number; delta: number }> = {
+  "7d":  { factor: 0.28, delta: 0.03 },
+  "30d": { factor: 0.78, delta: 0.01 },
+  "90d": { factor: 0.95, delta: 0 },
+  all:   { factor: 1,    delta: 0 },
+};
+
 const clamp01 = (n: number) => Math.max(0, Math.min(1, n));
 const round50 = (n: number) => Math.round(n / 50) * 50;
 
 export function sourcesForRange(range: string): SourceRow[] {
-  const f = RANGE_FACTOR[range] ?? 1;
-  const d = RANGE_RATE_DELTA[range] ?? 0;
+  const { factor: f, delta: d } = RANGE_CONFIG[range] ?? { factor: 1, delta: 0 };
   return sources.map((s) => ({
     ...s,
     leads: Math.max(1, Math.round(s.leads * f)),

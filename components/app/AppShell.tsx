@@ -110,7 +110,7 @@ function SidebarHeader() {
   return (
     <Sidebar.Header className="gap-3">
       {/* Logo */}
-      <div className={`flex items-center px-1 pt-1 ${!isOpen ? "justify-center" : "justify-center gap-2"}`}>
+      <div className={`flex items-center justify-center px-1 pt-1${isOpen ? " gap-2" : ""}`}>
         <ClosiumLogo className="h-7 w-auto shrink-0 text-[#000102]" />
         {isOpen && (
           <span className="text-lg font-medium text-foreground">Closium</span>

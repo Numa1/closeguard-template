@@ -482,10 +482,8 @@ function CloseRateCell({ value }: { value: number }) {
   );
 }
 
-let sparkGradientId = 0;
-
 function TrendCell({ closer }: { closer: Closer }) {
-  const id = useMemo(() => `closer-spark-${++sparkGradientId}`, []);
+  const id = `closer-spark-${closer.name.replace(/\s+/g, "-").toLowerCase()}`;
   const data = sparkByCloser[closer.name] ?? [];
 
   return (

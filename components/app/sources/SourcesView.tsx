@@ -224,7 +224,7 @@ export default function SourcesView() {
   const rows = useMemo(() => sourcesForRange(range), [range]);
   const fnl = useMemo(() => funnelForRange(rows), [rows]);
   const totalLeads = useMemo(() => rows.reduce((a, s) => a + s.leads, 0), [rows]);
-  const topId = useMemo(() => rows.reduce((a, b) => (b.collected > a.collected ? b : a), rows[0]).id, [rows]);
+  const topId = useMemo(() => (rows.length > 0 ? rows.reduce((a, b) => (b.collected > a.collected ? b : a)).id : ""), [rows]);
 
   const sorted = useMemo(() => {
     const col = sortDescriptor.column as keyof SourceRow;
